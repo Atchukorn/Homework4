@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Task } from '../task';
+import { TaskComponent } from '../task/task.component';
 
 @Component({
   selector: 'app-toclear-list',
@@ -7,18 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToclearListComponent {
 
-  task:string[] = [ ];
+  task:Task[] = [ ];
 
-  drink!: string;
+  taskName!: string;
+  taskDescription!: string;
 
   addtask(){
-    this.task.push(this.drink);
+    let tempTask: Task = {
+      id : 'xxxxx',
+      name: this.taskName,
+      description: this.taskDescription,
+    }
+    this.task.push(tempTask);
   }
 
-  //  deletedtask(clearlist:string){
-    // this.task=this.task.filter((k)=> k !==clearlist);
-    deletedtask(drinkIndex:number){
-      this.task=this.task.filter((k, index)=> index !==drinkIndex);
-
+  deletedtask(TaskComponent:TaskComponent){
+    this.task=this.task.filter(t => t !== TaskComponent.taskObj);
   }
 }
